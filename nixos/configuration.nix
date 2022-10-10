@@ -15,16 +15,34 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # xserver
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.windowManager.i3.enable = true;
-  services.xserver.windowManager.i3.package = pkgs.i3-gaps;
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  # xfc3
+    services.xserver = {
+    enable = true;
+    desktopManager = {
+      xterm.enable = false;
+      xfce.enable = true;
+    };
+    displayManager.defaultSession = "xfce";
   };
 
+
+  # i3
+  #services.xserver.enable = true;
+  #services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.windowManager.i3.enable = true;
+  #services.xserver.windowManager.i3.package = pkgs.i3-gaps;
+  #services.xserver = {
+  #  layout = "us";
+  #  xkbVariant = "";
+  #};
+
+  # kde
+  #services.xserver.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
+
+
+  # touchpad
   services.xserver.libinput.enable = true;
   services.xserver.libinput.touchpad.tapping = false;
   hardware.trackpoint.enable = true;
@@ -113,20 +131,23 @@ services.cron = {
     xorg.xbacklight
     i3status
     polybar
-    i3
     rofi
     dmenu
+    flameshot
     vim 
     wget
     curl
     git
     htop
+    openvpn
     i3lock
     pkgs.networkmanagerapplet
     obs-studio
+    ffmpeg
     python
     rsync
     rclone
+    wireguard-tools
     neovim
     discord
     neofetch
